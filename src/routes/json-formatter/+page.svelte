@@ -1,11 +1,12 @@
 <script lang="ts">
 	import * as Alert from '$lib/components/ui/alert';
-	import { Button } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
 
+	import CodeViewer from '$lib/components/code-viewer.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import * as Select from '$lib/components/ui/select';
+	import { cn } from '$lib/utils';
 
 	interface OutputJson {
 		text: string;
@@ -17,7 +18,7 @@
 
 	let minifyFlag = $state(false);
 
-	let inputJson = $state('');
+	let inputJson = $state('{"testKey": 420}');
 	let outputJson: OutputJson = $derived(minifyFlag ? minifyJson(inputJson) : formatJson(inputJson));
 
 	function formatJson(inputJson: string) {
@@ -81,27 +82,18 @@
 			bind:value={inputJson}
 			placeholder="Paste your JSON here..."
 			rows={15}
-			class="font-mono"
+			class={cn(
+				'font-mono',
+				inputJson.length > 0 && outputJson.error && 'focus:ring-red-500 focus-visible:ring-red-500'
+			)}
 		/>
-
-		<div class="relative">
-			<Textarea value={outputJson.text} readonly rows={15} class="font-mono" />
-			{#if outputJson}
-				<Button
-					variant="outline"
-					size="sm"
-					class="absolute right-2 top-2"
-					onclick={copyToClipboard}
-				>
-					Copy
-				</Button>
-			{/if}
-		</div>
 
 		{#if inputJson.length > 0 && outputJson.error}
 			<Alert.Root variant="destructive">
-				<Alert.Description>{outputJson.error}</Alert.Description>
+				<Alert.Description>The provided JSON is not valid: {outputJson.error}</Alert.Description>
 			</Alert.Root>
+		{:else if inputJson.length > 0 && !outputJson.error}
+			<CodeViewer code={outputJson.text} language="json" />
 		{/if}
 	</div>
 </div>
