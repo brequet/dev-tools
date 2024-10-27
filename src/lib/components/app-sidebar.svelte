@@ -1,11 +1,14 @@
 <script lang="ts">
 	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { navItems } from '$lib/navigation';
+	import { BASE_PATH, navItems } from '$lib/navigation';
 </script>
 
 <Sidebar.Root>
 	<Sidebar.Header>
-		<a class="h-8 items-center rounded-md px-2 text-xl font-bold text-sidebar-foreground" href="/">
+		<a
+			class="h-8 items-center rounded-md px-2 text-xl font-bold text-sidebar-foreground"
+			href={BASE_PATH}
+		>
 			🪛 Dev Tools
 		</a>
 	</Sidebar.Header>
@@ -17,7 +20,7 @@
 						<Sidebar.MenuItem>
 							<Sidebar.MenuButton>
 								{#snippet child({ props })}
-									<a href={navItem.href} {...props}>
+									<a href={BASE_PATH + navItem.href} {...props}>
 										<navItem.icon />
 										<span>{navItem.title}</span>
 									</a>

@@ -13,14 +13,8 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		paths: {
-			base: process.env.NODE_ENV === 'development' ? '' : '/dev-tools'
+			base: '/dev-tools'
 		},
-		trailingSlash: 'always', // Ensures trailing slash consistency
-
-		prerender: {
-			enabled: true,
-			entries: ['/'] // Add other paths if needed
-		}
 	}
 };
 
