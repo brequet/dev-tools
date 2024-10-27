@@ -13,7 +13,7 @@
 </script>
 
 <Sidebar.Provider>
-	<AppSidebar />
+	<AppSidebar {currentTool} />
 	<main class="h-screen flex-1 overflow-y-auto p-6">
 		{#if currentTool != null}
 			<ToolPage {currentTool}>

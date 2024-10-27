@@ -1,6 +1,13 @@
 <script lang="ts">
 	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { BASE_PATH, navItems } from '$lib/navigation';
+	import { BASE_PATH, navItems, type NavItem } from '$lib/navigation';
+	import { cn } from '$lib/utils';
+
+	let {
+		currentTool
+	}: {
+		currentTool: NavItem | undefined;
+	} = $props();
 </script>
 
 <Sidebar.Root>
@@ -18,7 +25,13 @@
 				<Sidebar.Menu>
 					{#each navItems as navItem (navItem.title)}
 						<Sidebar.MenuItem>
-							<Sidebar.MenuButton>
+							<Sidebar.MenuButton
+								class={cn(
+									'relative', // Required for absolute positioning
+									navItem.href == currentTool?.href &&
+										'before:absolute before:right-0 before:top-0 before:h-full before:w-1.5 before:bg-primary'
+								)}
+							>
 								{#snippet child({ props })}
 									<a href={BASE_PATH + navItem.href} {...props}>
 										<navItem.icon />
