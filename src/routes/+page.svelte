@@ -3,7 +3,7 @@
 	import { BASE_PATH, navItems } from '$lib/navigation';
 </script>
 
-<div class="container mx-auto p-4">
+<div class="container mx-auto mt-4 p-4">
 	<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 		{#each navItems as navItem (navItem.title)}
 			<a href={BASE_PATH + navItem.href} class="block no-underline">

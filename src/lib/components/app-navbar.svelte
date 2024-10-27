@@ -26,7 +26,7 @@
 <div class="flex flex-row items-center gap-4">
 	<Sidebar.Trigger />
 
-	<Button variant="outline" size="icon" href={BASE_PATH}>
+	<Button variant="ghost" size="icon" href={BASE_PATH}>
 		<House class="h-4 w-4" />
 	</Button>
 

@@ -15,7 +15,6 @@
 	} = $props();
 
 	const sidebar = useSidebar();
-	// sidebar.setOpen(true);
 </script>
 
 <Button
@@ -27,9 +26,9 @@
 	data-sidebar="trigger"
 	variant="ghost"
 	size="icon"
-	class={cn('h-7 w-7', className)}
+	class={cn(className)}
 	{...restProps}
 >
-	<PanelLeft />
+	<PanelLeft class="h-4 w-4" />
 	<span class="sr-only">Toggle Sidebar</span>
 </Button>

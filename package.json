@@ -16,10 +16,12 @@
 		"@sveltejs/adapter-static": "^3.0.6",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"@types/diff": "^5.2.3",
 		"@types/eslint": "^9.6.0",
 		"autoprefixer": "^10.4.20",
 		"bits-ui": "1.0.0-next.28",
 		"clsx": "^2.1.1",
+		"diff2html": "^3.4.48",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
@@ -40,6 +42,7 @@
 	},
 	"dependencies": {
 		"@types/prismjs": "^1.26.5",
+		"diff": "^7.0.0",
 		"prismjs": "^1.29.0"
 	}
 }

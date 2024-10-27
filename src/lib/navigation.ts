@@ -1,4 +1,4 @@
-import { Braces, Calendar1 } from 'lucide-svelte';
+import { Braces, Calendar1, FileDiff } from 'lucide-svelte';
 
 export interface NavItem {
     title: string;
@@ -22,6 +22,12 @@ export const navItems: NavItem[] = [
         href: '/json-formatter',
         icon: Braces
     },
+    {
+        title: 'Diff viewer',
+        description: 'Compare two blocks of text.',
+        href: '/diff-viewer',
+        icon: FileDiff
+    }
 ];
 
 export function getNavItem(href: string): NavItem | undefined {
