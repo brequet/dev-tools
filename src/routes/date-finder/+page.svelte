@@ -25,32 +25,32 @@
 	}
 </script>
 
-<div class="container mx-auto space-y-6 p-4">
-	<h2 class="text-3xl font-bold">Date Finder</h2>
-	<div class="grid w-full items-center gap-4">
-		<div class="flex flex-col space-y-1.5">
-			<Label for="year">Year</Label>
-			<Input id="year" type="number" bind:value={year} placeholder="Enter year" />
-		</div>
-
-		<div class="flex flex-col space-y-1.5">
-			<Label class="font-medium" for="dayOfYear">Day of the Year:</Label>
-			<Input
-				type="number"
-				bind:value={dayOfYear}
-				oninput={validateDayOfYear}
-				class={cn(errorMessage && 'focus:ring-red-500 focus-visible:ring-red-500')}
-				placeholder="Enter day of the year"
-				min="1"
-				max="366"
-			/>
-
-			{#if errorMessage}
-				<p class="text-red-500">{errorMessage}</p>
-			{/if}
-		</div>
+<div class="grid w-full items-center gap-4">
+	<div class="flex flex-col space-y-1.5">
+		<Label for="year">Year</Label>
+		<Input id="year" type="number" bind:value={year} placeholder="Enter year" />
 	</div>
-	<p class="mt-6 text-lg font-medium text-foreground/90">
-		Date: {errorMessage ? 'Invalid input' : getDateFromDay(year, dayOfYear)}
-	</p>
+
+	<div class="flex flex-col space-y-1.5">
+		<Label class="font-medium" for="dayOfYear">Day of the Year:</Label>
+		<Input
+			type="number"
+			bind:value={dayOfYear}
+			oninput={validateDayOfYear}
+			class={cn(errorMessage && 'focus:ring-red-500 focus-visible:ring-red-500')}
+			placeholder="Enter day of the year"
+			min="1"
+			max="366"
+		/>
+
+		{#if errorMessage}
+			<p class="text-red-500">{errorMessage}</p>
+		{/if}
+	</div>
 </div>
+<p class="mt-6 text-lg text-foreground/90">
+	Date:
+	<span class="font-semibold">
+		{errorMessage ? 'Invalid input' : getDateFromDay(year, dayOfYear)}
+	</span>
+</p>
