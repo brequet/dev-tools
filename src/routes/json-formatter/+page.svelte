@@ -1,11 +1,10 @@
 <script lang="ts">
-	import * as Alert from '$lib/components/ui/alert';
-	import { Label } from '$lib/components/ui/label';
-	import { Textarea } from '$lib/components/ui/textarea';
-
 	import CodeViewer from '$lib/components/code-viewer.svelte';
+	import * as Alert from '$lib/components/ui/alert';
 	import { Checkbox } from '$lib/components/ui/checkbox';
+	import { Label } from '$lib/components/ui/label';
 	import * as Select from '$lib/components/ui/select';
+	import { Textarea } from '$lib/components/ui/textarea';
 	import { cn } from '$lib/utils';
 
 	interface OutputJson {
@@ -18,7 +17,7 @@
 
 	let minifyFlag = $state(false);
 
-	let inputJson = $state('{"testKey": 420}');
+	let inputJson = $state('');
 	let outputJson: OutputJson = $derived(minifyFlag ? minifyJson(inputJson) : formatJson(inputJson));
 
 	function formatJson(inputJson: string) {
@@ -41,10 +40,6 @@
 			outputJson.error = e instanceof Error ? e.message : 'Invalid JSON';
 		}
 		return outputJson;
-	}
-
-	function copyToClipboard() {
-		navigator.clipboard.writeText(outputJson.text);
 	}
 </script>
 
