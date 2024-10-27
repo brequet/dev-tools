@@ -15,6 +15,9 @@ const config = {
 		paths: {
 			base: '/dev-tools'
 		},
+		prerender: {
+			entries: ['*'] // This generates a 404.html for unknown paths
+		}
 	}
 };
 
