@@ -11,16 +11,16 @@ export const BASE_PATH = '/dev-tools';
 
 export const navItems: NavItem[] = [
     {
-        title: 'JSON Formatter/Minifier',
-        description: 'Format and minify JSON.',
-        href: '/json-formatter',
-        icon: Braces
-    },
-    {
         title: 'Date Finder',
         description: 'Find the date for a given day index and year.',
         href: '/date-finder',
         icon: Calendar1
+    },
+    {
+        title: 'JSON Formatter/Minifier',
+        description: 'Format and minify JSON.',
+        href: '/json-formatter',
+        icon: Braces
     },
 ];
 

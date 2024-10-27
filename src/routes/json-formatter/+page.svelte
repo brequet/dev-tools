@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import CodeViewer from '$lib/components/code-viewer.svelte';
 	import * as Alert from '$lib/components/ui/alert';
 	import { Checkbox } from '$lib/components/ui/checkbox';
@@ -7,8 +6,6 @@
 	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { cn } from '$lib/utils';
-
-	let currentSegment = $derived($page.url.pathname.split('/').filter(Boolean).at(-1));
 
 	interface OutputJson {
 		text: string;
