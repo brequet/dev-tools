@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import AppNavbar from '$lib/components/app-navbar.svelte';
 	import AppSidebar from '$lib/components/app-sidebar.svelte';
 	import ToolPage from '$lib/components/tool-page.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
@@ -15,6 +16,8 @@
 <Sidebar.Provider>
 	<AppSidebar {currentTool} />
 	<main class="h-screen flex-1 overflow-y-auto p-6">
+		<AppNavbar />
+
 		{#if currentTool != null}
 			<ToolPage {currentTool}>
 				{@render children?.()}
