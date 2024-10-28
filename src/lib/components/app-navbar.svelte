@@ -5,6 +5,7 @@
 	import { BASE_PATH, navItems } from '$lib/navigation';
 	import { House, Search } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
+	import GithubIcon from '$lib/assets/github-icon.svelte';
 
 	let open = $state(false);
 
@@ -23,11 +24,13 @@
 
 <svelte:document onkeydown={handleKeydown} />
 
-<div class="flex flex-row items-center gap-4">
+<div class="flex flex-row items-center justify-between gap-4">
+  <div>
 	<Sidebar.Trigger />
 
 	<Button variant="ghost" size="icon" href={BASE_PATH}>
 		<House class="h-4 w-4" />
+		<span class="sr-only">Go to home page</span>
 	</Button>
 
 	<Button class="w-80 justify-start" variant="secondary" onclick={() => (open = true)}>
@@ -35,6 +38,15 @@
 		Search
 		<span class="rounded-md border p-1">Ctrl + k</span>
 	</Button>
+    </div>
+	<a
+		href="https://github.com/brequet/dev-tools"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="block h-6 w-6 text-gray-600 hover:text-gray-900"
+	>
+		<GithubIcon />
+	</a>
 </div>
 
 <Command.Dialog bind:open>
