@@ -5,48 +5,24 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea';
+	import { formatJson, minifyJson } from '$lib/services/json';
 	import { cn } from '$lib/utils';
 
-	interface OutputJson {
-		text: string;
-		error: string | null;
-	}
-
 	const jsonSpacingOptions = [{ value: '2' }, { value: '4' }, { value: '8' }];
-	let selectJsonSpacingOption = $state(jsonSpacingOptions[0].value);
+	let selectedJsonSpacingOption = $state(jsonSpacingOptions[0].value);
 
 	let minifyFlag = $state(false);
 
 	let inputJson = $state('');
-	let outputJson: OutputJson = $derived(minifyFlag ? minifyJson(inputJson) : formatJson(inputJson));
-
-	function formatJson(inputJson: string) {
-		let outputJson: OutputJson = { text: '', error: null };
-		try {
-			const parsed = JSON.parse(inputJson);
-			outputJson.text = JSON.stringify(parsed, null, Number(selectJsonSpacingOption));
-		} catch (e) {
-			outputJson.error = e instanceof Error ? e.message : 'Invalid JSON';
-		}
-		return outputJson;
-	}
-
-	function minifyJson(inputJson: string) {
-		let outputJson: OutputJson = { text: '', error: null };
-		try {
-			const parsed = JSON.parse(inputJson);
-			outputJson.text = JSON.stringify(parsed);
-		} catch (e) {
-			outputJson.error = e instanceof Error ? e.message : 'Invalid JSON';
-		}
-		return outputJson;
-	}
+	let outputJson = $derived(
+		minifyFlag ? minifyJson(inputJson) : formatJson(inputJson, Number(selectedJsonSpacingOption))
+	);
 </script>
 
 <div class="space-y-4">
 	<div class="flex flex-wrap justify-between">
-		<Select.Root type="single" name="jsonSpacing" bind:value={selectJsonSpacingOption}>
-			<Select.Trigger class="w-[180px]">{selectJsonSpacingOption}</Select.Trigger>
+		<Select.Root type="single" name="jsonSpacing" bind:value={selectedJsonSpacingOption}>
+			<Select.Trigger class="w-[180px]">{selectedJsonSpacingOption}</Select.Trigger>
 			<Select.Content>
 				<Select.Group>
 					<Select.GroupHeading>JSON Spacing</Select.GroupHeading>

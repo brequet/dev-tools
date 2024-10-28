@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { Label } from '$lib/components/ui/label/index.js';
 	import * as Select from '$lib/components/ui/select';
+	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Textarea } from '$lib/components/ui/textarea';
+	import { formatJson } from '$lib/services/json';
 	import { createPatch } from 'diff';
 	import * as Diff2Html from 'diff2html';
 	import 'diff2html/bundles/css/diff2html.min.css';
@@ -15,19 +18,39 @@
 	let leftContent = $state('');
 	let rightContent = $state('');
 	let selectedOutputFormat = $state(outputFormatOptions[0].value as OutputFormatType);
-	let diffContainer: string = $derived.by(() => {
-		return getDiffAsHtml(leftContent, rightContent);
-	});
 
-	function getDiffAsHtml(leftContent: string, rightContent: string): string {
-		const diffString = createDiff(leftContent, rightContent);
+	let formatIfPossibleFlag = $state(true);
+
+	interface DiffResult {
+		html: string;
+		formattable: boolean;
+	}
+
+	let diffResult = $derived(getDiffAsHtml(leftContent, rightContent));
+
+	function getDiffAsHtml(leftContent: string, rightContent: string): DiffResult {
+		const jsonLeft = formatJson(leftContent);
+		const jsonRight = formatJson(rightContent);
+
+		const areContentsFormattable = jsonLeft.error == null && jsonRight.error == null;
+
+		let diffString: string;
+		if (formatIfPossibleFlag && areContentsFormattable) {
+			diffString = createDiff(jsonLeft.text, jsonRight.text);
+		} else {
+			diffString = createDiff(leftContent, rightContent);
+		}
+
 		const diffHtml = Diff2Html.html(diffString, {
 			drawFileList: false,
 			matching: 'lines',
 			outputFormat: selectedOutputFormat
 		});
 
-		return diffHtml;
+		return {
+			html: diffHtml,
+			formattable: areContentsFormattable
+		};
 	}
 
 	function createDiff(oldText: string, newText: string): string {
@@ -37,7 +60,12 @@
 </script>
 
 <div class="space-y-4">
-	<div class="flex justify-end">
+	<div class="flex justify-between">
+		<div class="flex items-center space-x-2">
+			<Switch bind:checked={formatIfPossibleFlag} id="formatFlag" />
+			<Label for="formatFlag">Format compared contents if possible</Label>
+		</div>
+
 		<Select.Root type="single" name="outputFormat" bind:value={selectedOutputFormat}>
 			<Select.Trigger class="w-[180px]"
 				>{selectedOutputFormat === 'line-by-line' ? 'Line by Line' : 'Side by Side'}</Select.Trigger
@@ -74,7 +102,10 @@
 		</div>
 	</div>
 
-	<div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-		<div class="relative">{@html diffContainer}</div>
+	<div>
+		<div class="relative">{@html diffResult.html}</div>
+		{#if !diffResult.formattable}
+			<p class="text-sm text-muted-foreground">The contents of the two text are not formattable.</p>
+		{/if}
 	</div>
 </div>
