@@ -11,6 +11,10 @@
 	} = $props();
 </script>
 
+<svelte:head>
+    <title>{currentTool.title}</title> 
+</svelte:head>
+
 <div class="container mx-auto p-4">
 	<h2 class="text-3xl font-bold">{currentTool?.title}</h2>
 	<p class="text-lg text-muted-foreground">

@@ -16,7 +16,7 @@
 			class="h-8 items-center rounded-md px-2 text-xl font-bold text-sidebar-foreground"
 			href={BASE_PATH}
 		>
-			🪛 Dev Tools
+			📐 Dev Tools
 		</a>
 	</Sidebar.Header>
 	<Sidebar.Content>

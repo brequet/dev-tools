@@ -3,6 +3,10 @@
 	import { BASE_PATH, navItems } from '$lib/navigation';
 </script>
 
+<svelte:head>
+    <title>Dev Tools</title> 
+</svelte:head>
+
 <div class="container mx-auto mt-4 p-4">
 	<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 		{#each navItems as navItem (navItem.title)}
