@@ -10,7 +10,10 @@
 
 	type OutputFormatType = 'line-by-line' | 'side-by-side';
 
-	const outputFormatOptions = [
+	const outputFormatOptions: {
+		value: OutputFormatType;
+		label: string;
+	}[] = [
 		{ value: 'line-by-line', label: 'Line by Line' },
 		{ value: 'side-by-side', label: 'Side by Side' }
 	];
