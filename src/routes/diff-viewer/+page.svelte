@@ -85,8 +85,8 @@
 	</div>
 
 	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		<div class="space-y-2">
-			<h3 class="text-sm font-medium">Original Text</h3>
+		<div class="space-y-1">
+			<Label class="text-sm font-medium">Original Text</Label>
 			<Textarea
 				bind:value={leftContent}
 				placeholder="Enter original text..."
@@ -94,8 +94,8 @@
 				class="font-mono"
 			/>
 		</div>
-		<div class="space-y-2">
-			<h3 class="text-sm font-medium">Modified Text</h3>
+		<div class="space-y-1">
+			<Label class="text-sm font-medium">Modified Text</Label>
 			<Textarea
 				bind:value={rightContent}
 				placeholder="Enter modified text..."
@@ -108,7 +108,9 @@
 	<div>
 		<div class="relative">{@html diffResult.html}</div>
 		{#if !diffResult.formattable}
-			<p class="text-sm text-muted-foreground">The contents of the two text are not formattable.</p>
+			<p class="text-sm text-muted-foreground">
+				The contents of the two texts are not formattable.
+			</p>
 		{/if}
 	</div>
 </div>
