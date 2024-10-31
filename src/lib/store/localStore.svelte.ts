@@ -1,32 +1,31 @@
 import { browser } from '$app/environment';
 
-// const STORAGE_KEY = 'user_preferences';
-
 export class LocalStore<T> {
     value = $state<T>() as T;
     key = '';
+    #firstTimeLoad = true;
 
     constructor(key: string, value: T) {
         this.key = key;
         this.value = value;
 
-        let firstTimeLoad = true;
-
-        console.log('DEBUG loading from local', key, value)
 
         if (browser) {
             const item = localStorage.getItem(key);
             if (item) {
+                this.#firstTimeLoad = false;
                 this.value = this.deserialize(item);
             }
         }
 
         $effect(() => {
-            if (firstTimeLoad) {
-                firstTimeLoad = false;
-                return;
+            if (this.value == null) return;
+
+            if (this.#firstTimeLoad) {
+                this.#firstTimeLoad = false;
+                return
             }
-            console.log('DEBUG saving to local', key, this.value)
+
             localStorage.setItem(this.key, this.serialize(this.value));
         });
     }

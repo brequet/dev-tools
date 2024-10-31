@@ -4,26 +4,33 @@
 	import * as Select from '$lib/components/ui/select';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { formatJson, minifyJson } from '$lib/services/json';
+	import { localStore } from '$lib/store/localStore.svelte';
 	import { cn } from '$lib/utils';
 
 	const formattingOptions = [{ value: 'Format' }, { value: 'Minify' }];
-	let selectedFormattingOption = $state(formattingOptions[0].value);
+	let selectedFormattingOption = localStore(
+		'json-formatter.formattingOption',
+		formattingOptions[0].value
+	);
 
 	const jsonSpacingOptions = [{ value: '2' }, { value: '4' }, { value: '8' }];
-	let selectedJsonSpacingOption = $state(jsonSpacingOptions[0].value);
+	let selectedJsonSpacingOption = localStore(
+		'json-formatter.jsonSpacing',
+		jsonSpacingOptions[0].value
+	);
 
 	let inputJson = $state('');
 	let outputJson = $derived(
-		selectedFormattingOption === 'Minify'
+		selectedFormattingOption.value === 'Minify'
 			? minifyJson(inputJson)
-			: formatJson(inputJson, Number(selectedJsonSpacingOption))
+			: formatJson(inputJson, Number(selectedJsonSpacingOption.value))
 	);
 </script>
 
 <div class="space-y-4">
 	<div class="flex gap-4">
-		<Select.Root type="single" name="jsonSpacing" bind:value={selectedFormattingOption}>
-			<Select.Trigger class="w-[180px]">{selectedFormattingOption}</Select.Trigger>
+		<Select.Root type="single" name="jsonSpacing" bind:value={selectedFormattingOption.value}>
+			<Select.Trigger class="w-[180px]">{selectedFormattingOption.value}</Select.Trigger>
 			<Select.Content>
 				<Select.Group>
 					<Select.GroupHeading>Formatting Option</Select.GroupHeading>
@@ -36,9 +43,9 @@
 			</Select.Content>
 		</Select.Root>
 
-		{#if selectedFormattingOption === 'Format'}
-			<Select.Root type="single" name="jsonSpacing" bind:value={selectedJsonSpacingOption}>
-				<Select.Trigger class="w-[180px]">{selectedJsonSpacingOption}</Select.Trigger>
+		{#if selectedFormattingOption.value === 'Format'}
+			<Select.Root type="single" name="jsonSpacing" bind:value={selectedJsonSpacingOption.value}>
+				<Select.Trigger class="w-[180px]">{selectedJsonSpacingOption.value}</Select.Trigger>
 				<Select.Content>
 					<Select.Group>
 						<Select.GroupHeading>JSON Spacing</Select.GroupHeading>

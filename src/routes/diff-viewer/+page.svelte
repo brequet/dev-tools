@@ -26,10 +26,12 @@
 		outputFormatOptions[0].value as OutputFormatType
 	);
 
-	let formatIfPossibleFlag = $state(true);
+	let formatIfPossibleFlag = localStore('diff-viewer.formatIfPossible', true);
 
 	interface DiffResult {
 		html: string;
+		text: string;
+		isDiff: boolean;
 		formattable: boolean;
 	}
 
@@ -42,7 +44,7 @@
 		const areContentsFormattable = jsonLeft.error == null && jsonRight.error == null;
 
 		let diffString: string;
-		if (formatIfPossibleFlag && areContentsFormattable) {
+		if (formatIfPossibleFlag.value && areContentsFormattable) {
 			diffString = createDiff(jsonLeft.text, jsonRight.text);
 		} else {
 			diffString = createDiff(leftContent, rightContent);
@@ -56,12 +58,14 @@
 
 		return {
 			html: diffHtml,
+			text: diffString,
+			isDiff: diffString.includes('@@'),
 			formattable: areContentsFormattable
 		};
 	}
 
 	function createDiff(oldText: string, newText: string): string {
-		const diff = createPatch('file.txt', oldText || '', newText || '', '', '', { context: 3 });
+		const diff = createPatch('', oldText || '', newText || '', '', '', { context: 3 });
 		return diff;
 	}
 </script>
@@ -69,7 +73,7 @@
 <div class="space-y-4">
 	<div class="flex justify-between">
 		<div class="flex items-center space-x-2">
-			<Switch bind:checked={formatIfPossibleFlag} id="formatFlag" />
+			<Switch bind:checked={formatIfPossibleFlag.value} id="formatFlag" />
 			<Label for="formatFlag">Format compared contents if possible</Label>
 		</div>
 
@@ -115,12 +119,18 @@
 		</div>
 	</div>
 
-	<div>
-		<div class="relative">{@html diffResult.html}</div>
-		{#if !diffResult.formattable}
-			<p class="text-sm text-muted-foreground">
-				The contents of the two texts are not formattable.
-			</p>
-		{/if}
-	</div>
+	{#if leftContent !== '' || rightContent !== ''}
+		<div>
+			{#if diffResult.isDiff}
+				<div class="relative">{@html diffResult.html}</div>
+				{#if !diffResult.formattable}
+					<p class="text-sm text-muted-foreground">
+						The contents of the two texts are not formattable.
+					</p>
+				{/if}
+			{:else}
+				<p class="text-sm text-foreground">No differences found between the two blocks.</p>
+			{/if}
+		</div>
+	{/if}
 </div>
