@@ -4,6 +4,7 @@
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { formatJson } from '$lib/services/json';
+	import { localStore } from '$lib/store/localStore.svelte';
 	import { createPatch } from 'diff';
 	import * as Diff2Html from 'diff2html';
 	import 'diff2html/bundles/css/diff2html.min.css';
@@ -20,7 +21,10 @@
 
 	let leftContent = $state('');
 	let rightContent = $state('');
-	let selectedOutputFormat = $state(outputFormatOptions[0].value as OutputFormatType);
+	let selectedOutputFormat = localStore(
+		'diff-viewer.outputFormat',
+		outputFormatOptions[0].value as OutputFormatType
+	);
 
 	let formatIfPossibleFlag = $state(true);
 
@@ -47,7 +51,7 @@
 		const diffHtml = Diff2Html.html(diffString, {
 			drawFileList: false,
 			matching: 'lines',
-			outputFormat: selectedOutputFormat
+			outputFormat: selectedOutputFormat.value
 		});
 
 		return {
@@ -69,9 +73,15 @@
 			<Label for="formatFlag">Format compared contents if possible</Label>
 		</div>
 
-		<Select.Root type="single" name="outputFormat" bind:value={selectedOutputFormat}>
+		<Select.Root
+			type="single"
+			name="outputFormat"
+			onValueChange={(v) => (selectedOutputFormat.value = v as OutputFormatType)}
+		>
 			<Select.Trigger class="w-[180px]"
-				>{selectedOutputFormat === 'line-by-line' ? 'Line by Line' : 'Side by Side'}</Select.Trigger
+				>{selectedOutputFormat.value === 'line-by-line'
+					? 'Line by Line'
+					: 'Side by Side'}</Select.Trigger
 			>
 			<Select.Content>
 				<Select.Group>
