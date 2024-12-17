@@ -1,4 +1,4 @@
-import { Braces, Calendar1, FileDiff } from 'lucide-svelte';
+import { Braces, Calendar1, FileDiff, Signature } from 'lucide-svelte';
 
 export interface NavItem {
     title: string;
@@ -27,6 +27,12 @@ export const navItems: NavItem[] = [
         description: 'Compare two blocks of text.',
         href: '/diff-viewer',
         icon: FileDiff
+    },
+    {
+        title: 'Lorem Ipsum',
+        description: 'Generate random text.',
+        href: '/lorem-ipsum',
+        icon: Signature
     }
 ];
 
