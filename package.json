@@ -43,6 +43,7 @@
 	"dependencies": {
 		"@types/prismjs": "^1.26.5",
 		"diff": "^7.0.0",
-		"prismjs": "^1.29.0"
+		"prismjs": "^1.29.0",
+		"xml-formatter": "^3.6.6"
 	}
 }
