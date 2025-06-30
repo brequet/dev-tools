@@ -4,6 +4,7 @@
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { formatJson } from '$lib/services/json';
+	import { formatXml } from '$lib/services/xml';
 	import { localStore } from '$lib/store/localStore.svelte';
 	import { createPatch } from 'diff';
 	import * as Diff2Html from 'diff2html';
@@ -38,14 +39,26 @@
 	let diffResult = $derived(getDiffAsHtml(leftContent, rightContent));
 
 	function getDiffAsHtml(leftContent: string, rightContent: string): DiffResult {
+		// Try JSON first
 		const jsonLeft = formatJson(leftContent);
 		const jsonRight = formatJson(rightContent);
 
-		const areContentsFormattable = jsonLeft.error == null && jsonRight.error == null;
+		const xmlLeft = formatXml(leftContent);
+		const xmlRight = formatXml(rightContent);
+
+		const isJson = jsonLeft.error == null && jsonRight.error == null;
+		const isXml = xmlLeft.error == null && xmlRight.error == null;
+		const areContentsFormattable = isJson || isXml;
 
 		let diffString: string;
 		if (formatIfPossibleFlag.value && areContentsFormattable) {
-			diffString = createDiff(jsonLeft.text, jsonRight.text);
+			if (isJson) {
+				diffString = createDiff(jsonLeft.text, jsonRight.text);
+			} else if (isXml) {
+				diffString = createDiff(xmlLeft.text, xmlRight.text);
+			} else {
+				diffString = createDiff(leftContent, rightContent);
+			}
 		} else {
 			diffString = createDiff(leftContent, rightContent);
 		}
