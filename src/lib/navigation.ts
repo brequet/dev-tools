@@ -1,4 +1,4 @@
-import { Braces, Calendar1, CodeXml, FileDiff, Signature } from 'lucide-svelte';
+import { Braces, Calendar1, FileDiff, Signature } from 'lucide-svelte';
 
 export interface NavItem {
     title: string;
@@ -17,16 +17,10 @@ export const navItems: NavItem[] = [
         icon: Calendar1
     },
     {
-        title: 'JSON Formatter/Minifier',
-        description: 'Format and minify JSON.',
-        href: '/json-formatter',
+        title: 'JSON/XML Formatter/Minifier',
+        description: 'Format and minify JSON/XML.',
+        href: '/formatter',
         icon: Braces
-    },
-    {
-        title: 'XML Formatter/Minifier',
-        description: 'Format and minify XML.',
-        href: '/xml-formatter',
-        icon: CodeXml
     },
     {
         title: 'Diff viewer',
