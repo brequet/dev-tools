@@ -4,7 +4,8 @@
 	import { cn } from '$lib/utils';
 
 	let year = $state(new Date().getFullYear());
-	let dayOfYear = $state(128);
+
+	let dayOfYear = $state(getTodayDayOfYear());
 	let errorMessage = $state('');
 
 	function getDateFromDay(year: number, dayOfYear: number): string {
@@ -22,6 +23,13 @@
 		} else {
 			errorMessage = '';
 		}
+	}
+
+	function getTodayDayOfYear(): number {
+		const now = new Date();
+		const start = new Date(now.getFullYear(), 0, 0);
+		const diff = now.getTime() - start.getTime();
+		return Math.floor(diff / (1000 * 60 * 60 * 24));
 	}
 </script>
 
