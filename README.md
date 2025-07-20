@@ -1,38 +1,48 @@
-# create-svelte
+# Dev Tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+A collection of simple, useful utilities for developers. Everything runs locally in your browser, your data stays yours.
 
-## Creating a project
+**Live Demo:** [https://brequet.github.io/dev-tools/](https://brequet.github.io/dev-tools/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+---
 
-```bash
-# create a new project in the current directory
-npx sv create
+## ✨ Features
 
-# create a new project in my-app
-npx sv create my-app
-```
+This application provides a suite of tools to streamline common development tasks:
 
-## Developing
+*   **Date Finder**: Quickly find a specific date from the day of the year.
+*   **Formatter/Minifier**: Format or minify JSON and XML content. It automatically detects the language for you.
+*   **Diff Viewer**: Compare two blocks of text or code. Features include side-by-side or line-by-line views and an option to format content before comparing.
+*   **Lorem Ipsum Generator**: Create placeholder text by word, phrase, or paragraph count.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 🚀 Getting Started
 
-```bash
-npm run dev
+To get a local copy up and running, follow these simple steps.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### Prerequisites
 
-## Building
+Make sure you have [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) installed on your machine.
 
-To create a production version of your app:
+### Installation
 
-```bash
-npm run build
-```
+1.  Clone the repository:
+    ```
+    git clone https://github.com/brequet/dev-tools.git
+    cd dev-tools
+    ```
+2.  Install dependencies:
+    ```
+    pnpm install
+    ```
+3.  Start the development server:
+    ```
+    pnpm run dev
+    ```
+    The application will be available at `http://localhost:5173/dev-tools/`.
 
-You can preview the production build with `npm run preview`.
+## 📄 License
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This project is licensed under the MIT License.
+
+---
+
