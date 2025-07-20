@@ -3,7 +3,6 @@
 	import { navItems, type NavItem } from '$lib/navigation';
 	import { cn } from '$lib/utils';
 
-	import { base } from '$app/paths';
 	let {
 		currentTool
 	}: {
@@ -15,7 +14,7 @@
 	<Sidebar.Header>
 		<a
 			class="h-8 items-center rounded-md px-2 text-xl font-bold text-sidebar-foreground"
-			href={base}
+			href={'/'}
 		>
 			📐 Dev Tools
 		</a>
@@ -34,7 +33,7 @@
 								)}
 							>
 								{#snippet child({ props })}
-									<a href={base + navItem.href} {...props}>
+									<a href={navItem.href} {...props}>
 										<navItem.icon />
 										<span>{navItem.title}</span>
 									</a>

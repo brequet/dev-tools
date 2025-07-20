@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
 	import GithubIcon from '$lib/assets/github-icon.svelte';
 	import * as Command from '$lib/components/ui/command';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
@@ -19,27 +18,27 @@
 
 	function navigateTo(href: string) {
 		open = false;
-		goto(base + href);
-	}	
+		goto(href);
+	}
 </script>
 
 <svelte:document onkeydown={handleKeydown} />
 
 <div class="flex flex-row items-center justify-between gap-4">
-  <div>
-	<Sidebar.Trigger />
+	<div>
+		<Sidebar.Trigger />
 
-	<Button variant="ghost" size="icon" href={base}>
-		<House class="h-4 w-4" />
-		<span class="sr-only">Go to home page</span>
-	</Button>
+		<Button variant="ghost" size="icon" href={'/'}>
+			<House class="h-4 w-4" />
+			<span class="sr-only">Go to home page</span>
+		</Button>
 
-	<Button class="w-80 justify-start" variant="secondary" onclick={() => (open = true)}>
-		<Search />
-		Search
-		<span class="rounded-md border p-1">Ctrl + k</span>
-	</Button>
-    </div>
+		<Button class="w-80 justify-start" variant="secondary" onclick={() => (open = true)}>
+			<Search />
+			Search
+			<span class="rounded-md border p-1">Ctrl + k</span>
+		</Button>
+	</div>
 	<a
 		href="https://github.com/brequet/dev-tools"
 		target="_blank"
