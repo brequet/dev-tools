@@ -1,8 +1,9 @@
 <script lang="ts">
 	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { BASE_PATH, navItems, type NavItem } from '$lib/navigation';
+	import { navItems, type NavItem } from '$lib/navigation';
 	import { cn } from '$lib/utils';
 
+	import { base } from '$app/paths';
 	let {
 		currentTool
 	}: {
@@ -14,7 +15,7 @@
 	<Sidebar.Header>
 		<a
 			class="h-8 items-center rounded-md px-2 text-xl font-bold text-sidebar-foreground"
-			href={BASE_PATH}
+			href={base}
 		>
 			📐 Dev Tools
 		</a>
@@ -33,7 +34,7 @@
 								)}
 							>
 								{#snippet child({ props })}
-									<a href={BASE_PATH + navItem.href} {...props}>
+									<a href={base + navItem.href} {...props}>
 										<navItem.icon />
 										<span>{navItem.title}</span>
 									</a>

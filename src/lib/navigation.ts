@@ -7,8 +7,6 @@ export interface NavItem {
     icon?: typeof Braces;
 }
 
-export const BASE_PATH = '/dev-tools';
-
 export const navItems: NavItem[] = [
     {
         title: 'Date Finder',

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
+	import GithubIcon from '$lib/assets/github-icon.svelte';
 	import * as Command from '$lib/components/ui/command';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import { BASE_PATH, navItems } from '$lib/navigation';
+	import { navItems } from '$lib/navigation';
 	import { House, Search } from 'lucide-svelte';
 	import Button from './ui/button/button.svelte';
-	import GithubIcon from '$lib/assets/github-icon.svelte';
 
 	let open = $state(false);
 
@@ -18,8 +19,8 @@
 
 	function navigateTo(href: string) {
 		open = false;
-		goto(BASE_PATH + href);
-	}
+		goto(base + href);
+	}	
 </script>
 
 <svelte:document onkeydown={handleKeydown} />
@@ -28,7 +29,7 @@
   <div>
 	<Sidebar.Trigger />
 
-	<Button variant="ghost" size="icon" href={BASE_PATH}>
+	<Button variant="ghost" size="icon" href={base}>
 		<House class="h-4 w-4" />
 		<span class="sr-only">Go to home page</span>
 	</Button>
