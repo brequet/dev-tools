@@ -62,6 +62,7 @@
 
 	<Textarea
 		bind:value={inputText}
+		autofocus
 		placeholder="Paste your JSON or XML here..."
 		rows={15}
 		class={cn(

@@ -116,6 +116,7 @@
 			<Label class="text-sm font-medium">Original Text</Label>
 			<Textarea
 				bind:value={leftContent}
+				autofocus
 				placeholder="Enter original text..."
 				rows={15}
 				class="font-mono"
