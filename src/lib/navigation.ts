@@ -1,4 +1,4 @@
-import { Braces, Calendar1, FileDiff, Signature } from 'lucide-svelte';
+import { Braces, Calendar1, Eye, FileDiff, Signature } from 'lucide-svelte';
 
 export interface NavItem {
     title: string;
@@ -26,8 +26,14 @@ export const navItems: NavItem[] = [
         href: '/diff-viewer',
         icon: FileDiff
     },
-    {
-        title: 'Lorem Ipsum',
+	{
+		title: 'Markdown Viewer',
+		description: 'Edit and preview Markdown side by side.',
+		href: '/markdown-viewer',
+		icon: Eye
+	},
+	{
+		title: 'Lorem Ipsum',
         description: 'Generate random text.',
         href: '/lorem-ipsum',
         icon: Signature

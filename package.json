@@ -41,8 +41,11 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@tailwindcss/typography": "^0.5.19",
 		"@types/prismjs": "^1.26.5",
 		"diff": "^7.0.0",
+		"marked": "^18.0.2",
+		"paneforge": "^1.0.2",
 		"prismjs": "^1.29.0",
 		"xml-formatter": "^3.6.6"
 	}
