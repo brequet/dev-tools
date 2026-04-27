@@ -12,6 +12,7 @@
 		"lint": "prettier --check . && eslint ."
 	},
 	"devDependencies": {
+		"@lucide/svelte": "^1.11.0",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.58.0",
